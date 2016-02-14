@@ -14,7 +14,7 @@ async def on_ready():
 @client.event
 async def on_member_update(before, after):
 	if str(before.game) != str(after.game) and str(after.game) != 'None':
-		sagegeneral = client.get_channel('channel'))
+		sagegeneral = client.get_channel('channel')
 		lvmsg = '{} is now playing {}'.format(after.name, after.game)
 		await client.send_message(sagegeneral, lvmsg, tts=False)
 
@@ -25,7 +25,7 @@ async def on_message(message):
 		return
 
 	if message.content =='.debug_random_image':
-		sagegeneral = client.get_channel('channel'))
+		sagegeneral = client.get_channel('channel')
 		line = random.choice(open('debug_random_image.txt').readlines())
 		print("Debug: ",line)
 		await client.send_message(sagegeneral, line, tts=False)
