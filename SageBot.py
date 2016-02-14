@@ -17,5 +17,6 @@ async def on_member_update(before, after):
       lvmsg = '{} is now playing {}'.format(after.name, after.game)
       await client.send_message(sagegeneral, lvmsg, tts=False)
 
+#Run this if the bot is being started not as a master thread
 if __name__ == '__main__':
       client.run('email', 'password') #Login using the discord client we initialised
