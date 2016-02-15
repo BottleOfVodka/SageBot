@@ -26,7 +26,7 @@ async def on_message(message):
 
 	if message.content =='.debug_random_image':
 		sagegeneral = client.get_channel('channel')
-		line = random.choice(open('debug_random_image.txt').readlines())
+		line = random.choice(open('commands/debug_random_image.txt').readlines())
 		print("Debug: ",line)
 		await client.send_message(sagegeneral, line, tts=False)
 
