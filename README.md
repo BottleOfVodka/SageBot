@@ -9,6 +9,7 @@ A discord bot using the discord.py framework
 ### Installing Requirements
 1. Download and install Python 3.5.1 or higher from [https://www.python.org/downloads/]
 2. Open powershell or your chosen terminal program and run the following command `pip install git+https://github.com/Rapptz/discord.py@async`
+
 ### Configuring SageBot
 1. Open config.ini and enter the login details you want SageBot to use for Discord
 
