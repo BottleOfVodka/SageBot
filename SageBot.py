@@ -1,5 +1,6 @@
 import discord #import discord.py library
 import random #import library for entropy in commands
+import configparser #import library for reading config.ini
 
 client = discord.Client() #Initialise a discord client
 
@@ -14,9 +15,8 @@ async def on_ready():
 @client.event
 async def on_member_update(before, after):
 	if str(before.game) != str(after.game) and str(after.game) != 'None':
-		sagegeneral = client.get_channel('channel')
 		lvmsg = '{} is now playing {}'.format(after.name, after.game)
-		await client.send_message(sagegeneral, lvmsg, tts=False)
+		await client.send_message(before.server, lvmsg, tts=False)
 
 #Handle chat commands
 @client.event
@@ -24,16 +24,21 @@ async def on_message(message):
 	if message.author == client.user:
 		return
 
-	if message.content =='.debug_random_image':
-		sagegeneral = client.get_channel('channel')
-		line = random.choice(open('commands/debug_random_image.txt').readlines())
-		print("Debug: ",line)
-		await client.send_message(sagegeneral, line, tts=False)
+	if message.content.startswith('.sbi_'):
+		tmpimgtopost = message.content
+		imgtopost = tmpimgtopost[5:]
+		filetoread = 'commands/'+imgtopost+'.txt'
+		image = random.choice(open(filetoread).readlines())
+		await client.send_message(message.channel, image, tts=False)
 
 
 
 
 #Run this if the bot is being started not as a master thread
 if __name__ == '__main__':
-	print('=========\n=SAGEBOT=\n=========\nTHIS IS A DEVELOPMENT BUILD')
-	client.run('email', 'password') #Login using the discord client we initialised
+	config = configparser.ConfigParser()
+	config._interpolation = configparser.ExtendedInterpolation()
+	config.read('config.ini')
+	config.sections()
+	print('=========\n=SAGEBOT=\n=========')
+	client.run(config.get('DiscordClient', 'email'), config.get('DiscordClient', 'password')) #Login using the discord client we initialised
