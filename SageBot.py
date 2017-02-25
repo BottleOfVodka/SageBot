@@ -41,4 +41,4 @@ if __name__ == '__main__':
 	config.read('config.ini')
 	config.sections()
 	print('=========\n=SAGEBOT=\n=========')
-	client.run(config.get('DiscordClient', 'email'), config.get('DiscordClient', 'password')) #Login using the discord client we initialised
+	client.run(config.get('DiscordClient', 'token')) #Login using the discord client we initialised
